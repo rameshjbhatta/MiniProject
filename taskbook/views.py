@@ -3,7 +3,7 @@ from taskbook.models import *
 from django.contrib.auth import authenticate,login,logout
 
 # login authentication
-def index(request):
+def login(request):
     if request.method=='POST':
         #stores the username given in frontend to nusername variable
         nusername=request.POST['username']  
@@ -17,7 +17,7 @@ def index(request):
             return render(request,'taskbook/login.html',{'error_message':error_message})
     return render(request, 'taskbook/login.html')
 
-# def alternateindex(request):
+# def alternatelogin(request):
 #      if request.method=='POST':
 #         #stores the username given in frontend to nusername variable
 #         nusername=request.POST['username']  

@@ -23,7 +23,8 @@ admin.site.index_title='TaskBook Administration'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index, name='loginpage'),
+    path('',views.login, name='loginpage'),
+    path('',views.logout, name='logoutpage'),
     path('home/',views.home, name='homepage'),
     path('signup/',views.signup, name='signuppage'),
     path('create/',views.create, name='createpage'),
