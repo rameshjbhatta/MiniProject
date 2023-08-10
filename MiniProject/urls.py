@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from taskbook import views
 
+admin.site.site_header='Task Book'
+admin.site.index_title='TaskBook Administration'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index, name='loginpage'),

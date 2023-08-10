@@ -5,7 +5,11 @@
     <title>Home</title>
 </head>
 <body>
-   <h1>Welcome Home</h1> 
+    <p>Welcome ! Home</p>
+   <h1>Welcome Home {{user.username}}</h1> 
+   
    <a href="{% url 'createpage' %}">Create Task</a>
+   
+
 </body>
 </html>

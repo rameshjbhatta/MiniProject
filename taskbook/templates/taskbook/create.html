@@ -5,7 +5,7 @@
     <title>Home</title>
 </head>
 <body>
-    <p>Welcome ! Home</p>
+    
     <div id="task-form">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -17,5 +17,6 @@
             <input type="submit" name="createtask" value="Create Task" >
         </form>
     </div>
+    <a href="{% url 'homepage' %}">Home</a>
 </body>
 </html>
