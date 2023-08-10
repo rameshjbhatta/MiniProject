@@ -11,7 +11,8 @@
             {% csrf_token %}
             <input type="text" name="taskname" placeholder="enter eventame" required>
             <input type="text" name="location" placeholder="enter event location"required>
-            <input type="number" name="mobile" placeholder="enter mobile number"required>
+            <input type="number" name="mobile" placeholder="enter mobile number">
+            <input type="datetime-local" name="datetime" placeholder="enter date and time">
             <input type="detail" name="detail" placeholder="enter detail"required>
             <input type="submit" name="createtask" value="Create Task" >
         </form>
