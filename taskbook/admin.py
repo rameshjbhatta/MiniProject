@@ -3,11 +3,12 @@ from taskbook.models import *
 
 # Register your models here.
 class TaskAdminView(admin.ModelAdmin):
-    fields=['id','taskname','location','mobile','timedate','details']
+    list_display=['id','taskname','location','mobile','timedate','details']
    
 
-class UserAdminView(admin.ModelAdmin):
-    fields=['id','name','username','email','mobile','password']    
+class UserInfoAdminView(admin.ModelAdmin):
+    list_display=['id','name','username','email','mobile','password']  
+
 
 admin.site.register(TaskInfo,TaskAdminView)
-admin.site.register(UserInfo,UserAdminView)
+admin.site.register(UserInfo,UserInfoAdminView)
