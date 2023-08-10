@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Signup Page</title>
+</head>
+<body>
+    <div id="signup-form">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="text" name="username" placeholder="userame"required>
+            <input type="email" name="email" placeholder="email"required>
+            <input type="number" name="mobile" placeholder="mobile"required>
+            <input type="password" name="password" placeholder="password"required>
+            <input type="submit" name="Create An Account" value="signup" >
+        </form>
+        <p>If already an user<a href="{% url 'loginpage' %}">Login</a> </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Page</title>
+</head>
+<body>
+  <div id="login-form">
+    <form method ="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       <input type="text" name="username" placeholder="Username">
+       <input type="password" name="password" placeholder="password">
+       <input type="submit" name="Login" value="Login">
+
+    </form>
+    <p>If not registerd</p><a href="{% url 'signuppage' %}" >Create New Account</a>
+</div>
+</body>
+</html>
