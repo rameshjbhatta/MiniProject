@@ -17,15 +17,15 @@ def index(request):
             return render(request,'taskbook/login.html',{'error_message':error_message})
     return render(request, 'taskbook/login.html')
 
-def alternateindex(request):
-     if request.method=='POST':
-        #stores the username given in frontend to nusername variable
-        nusername=request.POST['username']  
-        npassword=request.POST['password']
-     user=authenticate(request,username=nusername,password=npassword)
-        if user is not None:
-            login(request,user)
-            return redirect('homepage')
+# def alternateindex(request):
+#      if request.method=='POST':
+#         #stores the username given in frontend to nusername variable
+#         nusername=request.POST['username']  
+#         npassword=request.POST['password']
+#      user=authenticate(request,username=nusername,password=npassword)
+#         if user is not None:
+#             login(request,user)
+#             return redirect('homepage')
 
 
 #create users or handle signup
