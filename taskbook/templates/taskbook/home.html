@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Home</title>
 </head>
+
 <body>
     <a href="{% url 'logoutpage' %}">LogOut</a>
-    <p>Welcome ! Home</p>
-   <h1>Welcome Home {{user.username}}</h1> 
-   
-   <a href="{% url 'createpage' %}">Create Task</a>
-   
+    <input type="hidden" name="user_id" value="{{ user.id }}">
+    <h1>Welcome Home {{user.username}}</h1>
+    <h1>Your Tasks</h1>
+    <table border="2px dotted"> 
+
+        <tr>
+            <th>Task Of</th>
+            <th>Task Name</th>
+            <th>Task Location</th>
+            <th>Task timing and date</th>
+            <th>Contact</th>
+            <th>Task details</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.usertask }}</td>
+            <td>{{ task.taskname }}</td>
+            <td>{{ task.location }}</td>
+            <td>{{ task.timedate }}</td>
+            <td>{{ task.mobile }}</td>
+            <td>{{ task.details }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+    </ul>
+    <a href="{% url 'createpage' %}">Create Task</a>
+
 
 </body>
+
 </html>

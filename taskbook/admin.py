@@ -3,7 +3,7 @@ from taskbook.models import *
 
 # Register your models here.
 class TaskAdminView(admin.ModelAdmin):
-    list_display=['id','taskname','location','mobile','timedate','details']
+    list_display=['id','usertask','taskname','location','mobile','timedate','details']
    
 
 class UserInfoAdminView(admin.ModelAdmin):

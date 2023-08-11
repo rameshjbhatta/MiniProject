@@ -7,14 +7,18 @@
 <body>
     
     <div id="task-form">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" >
             {% csrf_token %}
             <input type="text" name="taskname" placeholder="enter eventame" required>
+            <input type="text" name="taskid" placeholder="must be same as your username" required>
             <input type="text" name="location" placeholder="enter event location"required>
             <input type="number" name="mobile" placeholder="enter mobile number">
             <input type="datetime-local" name="timedate" placeholder="enter date and time">
             <input type="detail" name="details" placeholder="enter detail"required>
-            <input type="submit" name="createtask" value="Create Task" >
+            <input type="submit" name="createtask" value="Create Task" ><br>
+            {% if messages %}
+            {{messages}}
+            {% endif %}
         </form>
     </div>
     <a href="{% url 'homepage' %}">Home</a>

@@ -1,29 +1,34 @@
 from django.shortcuts import redirect, render
 from taskbook.models import *
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 
-
-def login(request):
+def loginHandler(request):
     if request.method=='POST':
         #stores the username given in frontend to nusername variable
         nusername=request.POST['username']  
         npassword=request.POST['password']
-        user=authenticate(request,username=nusername,password=npassword)
-        if user is not None:
-            login(request,user)
-            return redirect('homepage')
-    return render('request','taskbook/login.html')
+        try:
+            #select the user object containing the given username and password
+            user = UserInfo.objects.get(username=nusername , password=npassword)
+            tasks=TaskInfo.objects.all() 
+            return render(request,'taskbook/home.html',{'user':user,'tasks':tasks})
+        except UserInfo.DoesNotExist:
+            error_message='Invalid credintial'
+            return render(request,'taskbook/login.html',{'error_message':error_message})
+    return render(request, 'taskbook/login.html')
+
 
 
 # django logout function flushes out the users session and logout the active user
-def logout(request):
+def logoutHandler(request):
     logout(request)
-    return redirect('homepage')
+    return render(request,'taskbook/login.html')
     
 
 #create users or handle signup
-def signup(request):
+def signupHandler(request):
     if request.method=='POST':
         name=request.POST['name']
         username=request.POST['username']
@@ -35,11 +40,40 @@ def signup(request):
     else:    
        return render(request,'taskbook/signup.html')
     
-def create(request):
-    return render(request,'taskbook/create.html')
+     
+def createTask(request):
+    active_user=request.user
+    print(active_user)
+    if request.method=='POST':
+        taskid =request.POST['taskid']
+        tname=request.POST['taskname']
+        tlocation=request.POST['location']
+        tmobile=request.POST['mobile']
+        ttimedate=request.POST['timedate']
+        tdetails=request.POST['details']
+        tasks=TaskInfo(usertask=taskid,taskname=tname,location=tlocation,mobile=tmobile,timedate=ttimedate,details=tdetails)
+        try:
+            tasks.save()  # This will save the object to the database
+            success_message="Task Created Successfully!"
+            return render(request,'taskbook/create.html',{'tasks':tasks,'messages':success_message,'active_user':active_user} )
+        except Exception as e:
+            error_message="Sorry, Task Not Created:", str(e)
+            return render(request,'taskbook/create.html',{'messages':error_message} )  
+    tasks = TaskInfo.objects.all()
+    return render(request,'taskbook/create.html',{'tasks':tasks} )
+
 
 def home(request):
-    return render(request,'taskbook/home.html')
+    tasks = TaskInfo.objects.all()  # Filter tasks based on the logged-in user
+    return render(request, 'taskbook/home.html', {'tasks': tasks})
+
+
+
+
+
+
+
+
 
 
 
@@ -48,16 +82,12 @@ def home(request):
 
 
 #alternative method to login authentication
-# def login(request):
+# def loginHandler(request):
 #     if request.method=='POST':
-#         #stores the username given in frontend to nusername variable
 #         nusername=request.POST['username']  
 #         npassword=request.POST['password']
-#         try:
-#             #select the user object containing the given username and password
-#             user = UserInfo.objects.get(username=nusername , password=npassword) 
-#             return render(request,'taskbook/home.html',{'user':user})
-#         except UserInfo.DoesNotExist:
-#             error_message='Invalid credintial'
-#             return render(request,'taskbook/login.html',{'error_message':error_message})
-#     return render(request, 'taskbook/login.html')
+#         tuser=authenticate(username=nusername,password=npassword)
+#         if tuser is not None:
+#             login(request,tuser)
+#             return redirect('homepage')   
+#     return render('request','taskbook/login.html')
