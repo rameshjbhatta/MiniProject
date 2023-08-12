@@ -4,6 +4,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 
+def home(request):
+    tasks = TaskInfo.objects.all()  # Filter tasks based on the logged-in user
+    return render(request, 'taskbook/home.html', {'tasks': tasks})
+
+
 def loginHandler(request):
     if request.method=='POST':
         #stores the username given in frontend to nusername variable
@@ -24,8 +29,7 @@ def loginHandler(request):
 # django logout function flushes out the users session and logout the active user
 def logoutHandler(request):
     logout(request)
-    return render(request,'taskbook/login.html')
-    
+    return redirect('loginpage')
 
 #create users or handle signup
 def signupHandler(request):
@@ -42,8 +46,6 @@ def signupHandler(request):
     
      
 def createTask(request):
-    active_user=request.user
-    print(active_user)
     if request.method=='POST':
         taskid =request.POST['taskid']
         tname=request.POST['taskname']
@@ -55,7 +57,7 @@ def createTask(request):
         try:
             tasks.save()  # This will save the object to the database
             success_message="Task Created Successfully!"
-            return render(request,'taskbook/create.html',{'tasks':tasks,'messages':success_message,'active_user':active_user} )
+            return render(request,'taskbook/create.html',{'tasks':tasks,'messages':success_message} )
         except Exception as e:
             error_message="Sorry, Task Not Created:", str(e)
             return render(request,'taskbook/create.html',{'messages':error_message} )  
@@ -63,12 +65,22 @@ def createTask(request):
     return render(request,'taskbook/create.html',{'tasks':tasks} )
 
 
-def home(request):
-    tasks = TaskInfo.objects.all()  # Filter tasks based on the logged-in user
-    return render(request, 'taskbook/home.html', {'tasks': tasks})
+def updateTask(request,id):
+    tasks=TaskInfo.objects.get(id=id)
+    print(id)
+    if request.method=='POST':
+        tasks.usertask =request.POST['taskid']
+        tasks.taskname=request.POST['taskname']
+        tasks.location=request.POST['location']
+        tasks.mobile=request.POST['mobile']
+        tasks.timedate=request.POST['timedate']
+        tasks.details=request.POST['details']
+        tasks.save()
+        return redirect('homepage')
+    return render(request,'taskbook/update.html',{'tasks':tasks})
 
-
-
+def deleteTask(request,id):
+    return redirect('homepage')
 
 
 

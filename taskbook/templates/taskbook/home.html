@@ -14,21 +14,26 @@
     <table border="2px dotted"> 
 
         <tr>
+            <th>Task ID</th>
             <th>Task Of</th>
             <th>Task Name</th>
             <th>Task Location</th>
             <th>Task timing and date</th>
             <th>Contact</th>
             <th>Task details</th>
+            <th>Operations</th>
         </tr>
         {% for task in tasks %}
         <tr>
+            <td>{{ task.id }}</td>
             <td>{{ task.usertask }}</td>
             <td>{{ task.taskname }}</td>
             <td>{{ task.location }}</td>
             <td>{{ task.timedate }}</td>
             <td>{{ task.mobile }}</td>
             <td>{{ task.details }}</td>
+            <td><a href="{% url 'updatepage' task.id %}">Update</a>,
+              <a href="{% url 'deletepage' task.id %}">Delete</a> </td> 
         </tr>
         {% endfor %}
     </table>

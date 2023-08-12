@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+</head>
+<body>
+    <form method="post" >
+        {% csrf_token %}
+        <input type="text" name="taskname" value="{{tasks.usertask}}">
+        <input type="text" name="taskid" value="{{tasks.taskname}}">
+        <input type="text" name="location" value="{{tasks.location}}">
+        <input type="number" name="mobile" value="{{tasks.mobile}}">
+        <input type="datetime-local" name="timedate" value="{{tasks.datetime}}">
+        <input type="detail" name="details" value="{{tasks.details}}">
+        <input type="submit" name="createtask" value="Update Task" ><br>
+    </form>
+</body>
+</html>
