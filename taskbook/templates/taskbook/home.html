@@ -29,7 +29,7 @@
                 <td>{{ task.timedate }}</td>
                 <td>{{ task.mobile }}</td>
                 <td>{{ task.details }}</td>
-                <td><a href="{% url 'updatepage' task.id %}">Update</a>,
+                <td><a href="{% url 'updatepage' task.id %}">Update</a><hr>
                     <a href="{% url 'deletepage' task.id %}">Delete</a></td>
             </tr>
             {% endfor %}

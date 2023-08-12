@@ -100,8 +100,9 @@ def deleteTask(request,id):
 #     if request.method=='POST':
 #         nusername=request.POST['username']  
 #         npassword=request.POST['password']
-#         tuser=authenticate(username=nusername,password=npassword)
-#         if tuser is not None:
-#             login(request,tuser)
+#         user=authenticate(username=nusername,password=npassword)
+#         if user is not None:
+#             login(request,user)
 #             return redirect('homepage')   
 #     return render('request','taskbook/login.html')
+
