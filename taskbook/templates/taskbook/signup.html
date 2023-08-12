@@ -1,21 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Signup Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Page</title>
+<link rel="stylesheet" href="{% static 'taskbook/css/form.css' %}">
 </head>
 <body>
-    <div id="signup-form">
+    <div class="auth-form" id="signup-form">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="name" placeholder="Full Name" required>
-            <input type="text" name="username" placeholder="userame"required>
-            <input type="email" name="email" placeholder="email"required>
-            <input type="number" name="mobile" placeholder="mobile"required>
-            <input type="password" name="password" placeholder="password"required>
-            <input type="submit" name="Create An Account" value="signup" >
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="number" name="mobile" placeholder="Mobile" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" name="Create An Account" value="Sign Up">
         </form>
-        <p>If already an user<a href="{% url 'loginpage' %}">Login</a> </p>
+        <p>If already an user <a href="{% url 'loginpage' %}">Login</a></p>
     </div>
 </body>
 </html>

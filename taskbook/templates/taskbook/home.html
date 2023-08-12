@@ -1,50 +1,39 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
+{% include 'taskbook/header.html' %}
+    <div class="container">
+        <header>
+            <h2>Your Tasks {{user.username}}</h2>
+            <a href="{% url 'logoutpage' %}">Log Out</a>
+        </header>
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
-</head>
+        <input type="hidden" name="user_id" value="{{ user.id }}">
 
-<body>
-    <a href="{% url 'logoutpage' %}">LogOut</a>
-    <input type="hidden" name="user_id" value="{{ user.id }}">
-    <h1>Welcome Home {{user.username}}</h1>
-    <h1>Your Tasks</h1>
-    <table border="2px dotted"> 
-
-        <tr>
-            <th>Task ID</th>
-            <th>Task Of</th>
-            <th>Task Name</th>
-            <th>Task Location</th>
-            <th>Task timing and date</th>
-            <th>Contact</th>
-            <th>Task details</th>
-            <th>Operations</th>
-        </tr>
-        {% for task in tasks %}
-        <tr>
-            <td>{{ task.id }}</td>
-            <td>{{ task.usertask }}</td>
-            <td>{{ task.taskname }}</td>
-            <td>{{ task.location }}</td>
-            <td>{{ task.timedate }}</td>
-            <td>{{ task.mobile }}</td>
-            <td>{{ task.details }}</td>
-            <td><a href="{% url 'updatepage' task.id %}">Update</a>,
-              <a href="{% url 'deletepage' task.id %}">Delete</a> </td> 
-        </tr>
-        {% endfor %}
-    </table>
-
-
-
-
-    </ul>
-    <a href="{% url 'createpage' %}">Create Task</a>
-
-
-</body>
-
-</html>
+      
+        <table>
+            <tr>
+                <th>Task ID</th>
+                <th>Task Of</th>
+                <th>Task Name</th>
+                <th>Task Location</th>
+                <th>Task Timing and Date</th>
+                <th>Contact</th>
+                <th>Task Details</th>
+                <th>Operations</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.usertask }}</td>
+                <td>{{ task.taskname }}</td>
+                <td>{{ task.location }}</td>
+                <td>{{ task.timedate }}</td>
+                <td>{{ task.mobile }}</td>
+                <td>{{ task.details }}</td>
+                <td><a href="{% url 'updatepage' task.id %}">Update</a>,
+                    <a href="{% url 'deletepage' task.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="create-link" href="{% url 'createpage' %}">Create Task</a>
+    </div>
+{% include 'taskbook/footer.html' %}

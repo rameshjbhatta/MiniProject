@@ -1,19 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>title</title>
+{% load static %}
+{% include 'taskbook/header.html' %}
+    <title>Update Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        input[type="detail"] {
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <form method="post" >
-        {% csrf_token %}
-        <input type="text" name="taskname" value="{{tasks.usertask}}">
-        <input type="text" name="taskid" value="{{tasks.taskname}}">
-        <input type="text" name="location" value="{{tasks.location}}">
-        <input type="number" name="mobile" value="{{tasks.mobile}}">
-        <input type="datetime-local" name="timedate" value="{{tasks.datetime}}">
-        <input type="detail" name="details" value="{{tasks.details}}">
-        <input type="submit" name="createtask" value="Update Task" ><br>
-    </form>
-</body>
-</html>
+    <br><br>
+    <div class="container">
+        <a href="{% url 'homepage' %}">Home</a>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="taskname" value="{{ tasks.usertask }}">
+            <input type="text" name="taskid" value="{{ tasks.taskname }}">
+            <input type="text" name="location" value="{{ tasks.location }}">
+            <input type="number" name="mobile" value="{{ tasks.mobile }}">
+            <input type="datetime-local" name="timedate" value="{{ tasks.datetime }}">
+            <input type="detail" name="details" value="{{ tasks.details }}">
+            <input type="submit" name="updatetask" value="Update Task">
+        </form>
+    </div>
+    <br><br>
+{% include 'taskbook/footer.html' %}

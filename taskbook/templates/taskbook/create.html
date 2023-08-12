@@ -1,26 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
+{% load static %}
+{% include 'taskbook/header.html' %}
     <title>Create Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        input[type="detail"] {
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    
-    <div id="task-form">
-        <form method="post" >
-            {% csrf_token %}
-            <input type="text" name="taskname" placeholder="enter eventame" required>
-            <input type="text" name="taskid" placeholder="must be same as your username" required>
-            <input type="text" name="location" placeholder="enter event location"required>
-            <input type="number" name="mobile" placeholder="enter mobile number">
-            <input type="datetime-local" name="timedate" placeholder="enter date and time">
-            <input type="detail" name="details" placeholder="enter detail"required>
-            <input type="submit" name="createtask" value="Create Task" ><br>
-            {% if messages %}
-            {{messages}}
-            {% endif %}
-        </form>
+    <br><br>
+    <div class="container">
+        <a href="{% url 'homepage' %}">Home</a>
+        <div id="task-form">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="taskname" placeholder="Enter Event Name" required>
+                <input type="text" name="taskid" placeholder="Must Be Same As Your Username" required>
+                <input type="text" name="location" placeholder="Enter Event Location" required>
+                <input type="number" name="mobile" placeholder="Enter Mobile Number">
+                <input type="datetime-local" name="timedate" placeholder="Enter Date and Time">
+                <input type="detail" name="details" placeholder="Enter Detail" required>
+                <input type="submit" name="createtask" value="Create Task">
+                {% if messages %}
+                {{ messages }}
+                {% endif %}
+            </form>
+        </div>
     </div>
-    <a href="{% url 'homepage' %}">Home</a>
-</body>
-</html>
+    <br><br><br>
+{% include 'taskbook/footer.html' %}

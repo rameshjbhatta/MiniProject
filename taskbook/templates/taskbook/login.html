@@ -1,19 +1,21 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Login Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'taskbook/css/form.css' %}">
+<title>NOTE BOOK</title>
 </head>
 <body>
-  <div id="login-form">
-    <form method ="post" >
-        {% csrf_token %}
-       <input type="text" name="username" placeholder="Username">
-       <input type="password" name="password" placeholder="password">
-       <input type="submit" name="Login" value="Login">
-    </form>
-</div>
-<p>If not registerd</p><a href="{% url 'signuppage' %}" >Create New Account</a>
+    <div class="auth-form" id="login-form">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" name="Login" value="Login">
+        </form>
+        <p>If Not registered</p><a href="{% url 'signuppage' %}">Create New Account</a>
+    </div>
 </body>
 </html>

@@ -59,7 +59,7 @@ def createTask(request):
             success_message="Task Created Successfully!"
             return render(request,'taskbook/create.html',{'tasks':tasks,'messages':success_message} )
         except Exception as e:
-            error_message="Sorry, Task Not Created:", str(e)
+            error_message="Sorry, Task Not Created:"
             return render(request,'taskbook/create.html',{'messages':error_message} )  
     tasks = TaskInfo.objects.all()
     return render(request,'taskbook/create.html',{'tasks':tasks} )
@@ -80,6 +80,8 @@ def updateTask(request,id):
     return render(request,'taskbook/update.html',{'tasks':tasks})
 
 def deleteTask(request,id):
+    tasks=TaskInfo.objects.get(id=id)
+    tasks.delete()
     return redirect('homepage')
 
 
