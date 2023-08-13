@@ -3,10 +3,10 @@
     <div class="container">
         <header>  
                <h2>Your Tasks </h2>
-            <form method="get" action="{% url 'searchpage'  %}">
+            <form method="get">
                 {% csrf_token %}
                 <input type="search" name="q"  placeholder="search" >
-                <button type="submit"  >Search</button>
+                <input type="submit" >
             </form>
        
             <a href="{% url 'logoutpage' %}">Log Out</a>
@@ -26,6 +26,7 @@
                 <th>Task Details</th>
                 <th>Operations</th>
             </tr>
+          
             {% for task in tasks %}
             <tr>
                 <td>{{ task.id }}</td>
@@ -40,6 +41,11 @@
             </tr>
             {% endfor %}
         </table>
+        {% if message %}
+        <p> {{ message}}</p>
+        {% endif %}
         <a class="create-link" href="{% url 'createpage' %}">Create Task</a>
     </div>
+   
+    
 {% include 'taskbook/footer.html' %}

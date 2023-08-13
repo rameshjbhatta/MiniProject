@@ -13,7 +13,7 @@
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
-            <input type="submit" name="Login" value="Login">
+            <input type="submit" name="login" value="login">
         </form>
         <p>If Not registered</p><a href="{% url 'signuppage' %}">Create New Account</a>
     </div>

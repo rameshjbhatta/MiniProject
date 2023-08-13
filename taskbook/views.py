@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from taskbook.models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def home(request):
@@ -85,6 +86,22 @@ def deleteTask(request,id):
     return redirect('homepage')
 
 
+def searchTask(request):
+    query = request.GET.get('q')  # Get the search query from the GET request
+    tasks=None
+    if query:
+       tasks = TaskInfo.objects.filter(Q(usertask__icontains=query)|Q(location__icontains=query)|Q(mobile__icontains=query)|Q(taskname__icontains=query)|Q(details__icontains=query)|Q(timedate__icontains=query))
+       if tasks:
+            return render(request, 'taskbook/search.html', {
+                'tasks': tasks,
+                'query': query,
+            })
+       else:
+            message = 'No matching tasks found.'
+            return render(request, 'taskbook/search.html', {'message': message})
+    else:
+        message = 'Please enter a search query.'
+        return render(request, 'taskbook/search.html', {'message': message})
 
 
 
@@ -94,15 +111,18 @@ def deleteTask(request,id):
 
 
 
-
-#alternative method to login authentication
+# # method to login authentication for the djangouser model
 # def loginHandler(request):
 #     if request.method=='POST':
-#         nusername=request.POST['username']  
-#         npassword=request.POST['password']
-#         user=authenticate(username=nusername,password=npassword)
+#         username=request.POST['username']  
+#         password=request.POST['password']
+#         print(username,password)
+#         user=authenticate(username=username,password=password)
+#         print(user)
 #         if user is not None:
 #             login(request,user)
-#             return redirect('homepage')   
-#     return render('request','taskbook/login.html')
+#             return redirect('homepage')  
+#         else:
+#             print("invalid credintials") 
+#     return render(request,'taskbook/login.html')
 

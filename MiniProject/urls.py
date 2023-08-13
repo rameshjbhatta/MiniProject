@@ -33,4 +33,5 @@ urlpatterns = [
     path('create/',views.createTask, name='createpage'),
     path('update/<int:id>',views.updateTask, name='updatepage'),
     path('delete/<int:id>',views.deleteTask, name='deletepage'),
+    path('search/', views.searchTask,name="searchpage"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
