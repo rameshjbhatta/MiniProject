@@ -10,8 +10,8 @@
         
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="taskname" value="{{ tasks.usertask }}">
-            <input type="text" name="taskid" value="{{ tasks.taskname }}">
+            <input type="text" name="taskid" value="{{ tasks.usertask }}">
+            <input type="text" name="taskname" value="{{ tasks.taskname }}">
             <input type="text" name="location" value="{{ tasks.location }}">
             <input type="number" name="mobile" value="{{ tasks.mobile }}">
             <input type="datetime-local" name="timedate" value="{{ tasks.datetime }}">

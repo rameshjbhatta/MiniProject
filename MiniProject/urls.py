@@ -25,7 +25,7 @@ admin.site.site_header='Task Book'
 admin.site.index_title='TaskBook Administration'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('',views.loginHandler, name='loginpage'),
     path('logout/',views.logoutHandler, name='logoutpage'),
     path('home/',views.home, name='homepage'),

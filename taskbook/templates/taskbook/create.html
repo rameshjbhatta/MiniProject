@@ -11,7 +11,7 @@
             <form method="post">
                 {% csrf_token %}
                 <input type="text" name="taskname" placeholder="Enter Event Name" required>
-                <input type="text" name="taskid" placeholder="Must Be Same As Your Username" required>
+                <input type="text" name="taskid" placeholder="It is automatically filled as logic in views" >
                 <input type="text" name="location" placeholder="Enter Event Location" required>
                 <input type="number" name="mobile" placeholder="Enter Mobile Number">
                 <input type="datetime-local" name="timedate" placeholder="Enter Date and Time">
@@ -23,5 +23,5 @@
             </form>
         </div>
     </div>
-    <br><br><br>
+    <br><br><br><br>
 {% include 'taskbook/footer.html' %}

@@ -12,9 +12,8 @@
             <a href="{% url 'logoutpage' %}">Log Out</a>
         </header>
 
-        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <!-- <input type="hidden" name="user_id" value="{{ user.id }}"> -->
 
-      
         <table>
             <tr>
                 <th>Task ID</th>
@@ -47,5 +46,5 @@
         <a class="create-link" href="{% url 'createpage' %}">Create Task</a>
     </div>
    
-    
+    <br><br><br><br><br><br><br><br><br><br>
 {% include 'taskbook/footer.html' %}

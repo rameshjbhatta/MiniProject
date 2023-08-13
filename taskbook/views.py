@@ -5,12 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 
-def home(request):
-    tasks = TaskInfo.objects.all()  # extract all tasks from the TasInfo table and rendered to the home
-    return render(request, 'taskbook/home.html', {'tasks': tasks})
-
-
-
 def loginHandler(request):
     if request.method=='POST':
         #stores the username given in frontend to nusername variable
@@ -19,12 +13,29 @@ def loginHandler(request):
         try:
             #select the user object containing the given username and password
             user = UserInfo.objects.get(username=nusername , password=npassword)
-            tasks=TaskInfo.objects.all() 
+            request.session['user_id'] = user.id
+            print(request.session.items())
+            print(user.id)
+            tasks=TaskInfo.objects.filter(usertask=user.username) 
             return render(request,'taskbook/home.html',{'user':user,'tasks':tasks})
         except UserInfo.DoesNotExist:
             error_message='Invalid credintial'
             return render(request,'taskbook/login.html',{'error_message':error_message})
     return render(request, 'taskbook/login.html')
+
+
+def home(request):
+    user_id = request.session.get('user_id')  # Retrieve user_id from session
+    if user_id:
+        try:
+            user = UserInfo.objects.get(id=user_id)  # Fetch user information using user_id
+            tasks = TaskInfo.objects.filter(usertask=user.username)  # Fetch tasks as before
+            return render(request, 'taskbook/home.html', {'user': user, 'tasks': tasks})
+        except UserInfo.DoesNotExist:
+            return redirect('loginpage') # Handle if user doesn't exist
+    return redirect('homepage')  # Redirect to login if user_id is not present or user doesn't exist
+
+
 
 
 
@@ -50,8 +61,10 @@ def signupHandler(request):
 
      
 def createTask(request):
+    user_id = request.session.get('user_id') # Retrieve user_id from session
+    user = UserInfo.objects.get(id=user_id) # Fetch user information using user_id
     if request.method=='POST':
-        taskid =request.POST['taskid']
+        taskid =user.username
         tname=request.POST['taskname']
         tlocation=request.POST['location']
         tmobile=request.POST['mobile']
