@@ -83,6 +83,7 @@ def updateTask(request,id):
     return render(request,'taskbook/update.html',{'tasks':tasks})# these tasks are the older information of task 
 
 
+
 def deleteTask(id):
     tasks=TaskInfo.objects.get(id=id)
     tasks.delete()
