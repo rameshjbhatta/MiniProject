@@ -6,8 +6,9 @@ from django.db.models import Q
 
 
 def home(request):
-    tasks = TaskInfo.objects.all()  # Filter tasks based on the logged-in user
+    tasks = TaskInfo.objects.all()  # extract all tasks from the TasInfo table and rendered to the home
     return render(request, 'taskbook/home.html', {'tasks': tasks})
+
 
 
 def loginHandler(request):
@@ -32,6 +33,7 @@ def logoutHandler(request):
     logout(request)
     return redirect('loginpage')
 
+
 #create users or handle signup
 def signupHandler(request):
     if request.method=='POST':
@@ -45,6 +47,7 @@ def signupHandler(request):
     else:    
        return render(request,'taskbook/signup.html')
     
+
      
 def createTask(request):
     if request.method=='POST':
@@ -67,10 +70,9 @@ def createTask(request):
 
 
 def updateTask(request,id):
-    tasks=TaskInfo.objects.get(id=id)
-    print(id)
+    tasks=TaskInfo.objects.get(id=id)#gets the tasks that you had clicked to update
     if request.method=='POST':
-        tasks.usertask =request.POST['taskid']
+        tasks.usertask =request.POST['taskid'] #posta the updated data to that field
         tasks.taskname=request.POST['taskname']
         tasks.location=request.POST['location']
         tasks.mobile=request.POST['mobile']
@@ -78,19 +80,20 @@ def updateTask(request,id):
         tasks.details=request.POST['details']
         tasks.save()
         return redirect('homepage')
-    return render(request,'taskbook/update.html',{'tasks':tasks})
+    return render(request,'taskbook/update.html',{'tasks':tasks})# these tasks are the older information of task 
 
-def deleteTask(request,id):
+
+def deleteTask(id):
     tasks=TaskInfo.objects.get(id=id)
     tasks.delete()
     return redirect('homepage')
 
 
 def searchTask(request):
-    query = request.GET.get('q')  # Get the search query from the GET request
+    query = request.GET.get('q')  # Get the data from the GET request you want to search
     tasks=None
     if query:
-       tasks = TaskInfo.objects.filter(Q(usertask__icontains=query)|Q(location__icontains=query)|Q(mobile__icontains=query)|Q(taskname__icontains=query)|Q(details__icontains=query)|Q(timedate__icontains=query))
+       tasks = TaskInfo.objects.filter(Q(usertask__icontains=query)|Q(location__icontains=query)|Q(mobile__icontains=query)|Q(taskname__icontains=query)|Q(details__icontains=query)|Q(timedate__icontains=query)) # for complex search import Q from db.models
        if tasks:
             return render(request, 'taskbook/search.html', {
                 'tasks': tasks,
@@ -114,8 +117,8 @@ def searchTask(request):
 # # method to login authentication for the djangouser model
 # def loginHandler(request):
 #     if request.method=='POST':
-#         username=request.POST['username']  
-#         password=request.POST['password']
+#         username=request.POST.get('username') 
+#         password=request.POST.get('password')
 #         print(username,password)
 #         user=authenticate(username=username,password=password)
 #         print(user)
