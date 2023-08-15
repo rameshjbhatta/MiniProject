@@ -19,7 +19,7 @@ def loginHandler(request):
             tasks=TaskInfo.objects.filter(usertask=user.username) 
             return render(request,'taskbook/home.html',{'user':user,'tasks':tasks})
         except UserInfo.DoesNotExist:
-            error_message='Invalid credintial'
+            error_message='Invalid credintials'
             return render(request,'taskbook/login.html',{'error_message':error_message})
     return render(request, 'taskbook/login.html')
 
@@ -97,9 +97,10 @@ def updateTask(request,id):
 
 
 
-def deleteTask(id):
-    tasks=TaskInfo.objects.get(id=id)
-    tasks.delete()
+def deleteTask(request,id):
+    task=TaskInfo.objects.get(id=id)
+    print(task)
+    task.delete()
     return redirect('homepage')
 
 

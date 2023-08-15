@@ -9,12 +9,16 @@
 </head>
 <body>
     <div class="auth-form" id="login-form">
+      
         <form method="post">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" name="login" value="login">
         </form>
+        {% if error_message %}
+        <p style="color: red;"> {{error_message}}</p> 
+          {% endif %}
         <p>If Not registered</p><a href="{% url 'signuppage' %}">Create New Account</a>
     </div>
 </body>
