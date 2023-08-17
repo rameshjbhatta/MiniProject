@@ -132,8 +132,8 @@ def searchTask(request):
 # # method to login authentication for the djangouser model
 # def loginHandler(request):
 #     if request.method=='POST':
-#         username=request.POST.get('username') 
-#         password=request.POST.get('password')
+#         username=request.POST.get('loginusername') 
+#         password=request.POST.get('loginpassword')
 #         print(username,password)
 #         user=authenticate(username=username,password=password)
 #         print(user)
