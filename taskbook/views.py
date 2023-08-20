@@ -3,6 +3,22 @@ from taskbook.models import *
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from rest_framework.generics import ListAPIView,ListCreateAPIView
+from rest_framework import generics
+from rest_framework import viewsets
+from taskbook.serializer import *
+
+# generating API using viewsets 
+class UserInfoviewsets(viewsets.ModelViewSet):
+    queryset=UserInfo.objects.all()
+    serializer_class=UserInfoSerializer
+
+
+# generating API using generics : in this we use different class for different functions 
+class TaskInfoList(generics.ListAPIView):
+    queryset=TaskInfo.objects.all()
+    serializer_class=TaskInfoSerializer
+
 
 
 def loginHandler(request):

@@ -16,17 +16,28 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.db import router
+from django.urls import include, path
 from taskbook import views
 from django.conf.urls.static import static
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from taskbook.views import *
+
+router = DefaultRouter()
+router.register(r'userinfos', UserInfoviewsets)
+# router.register(r'taskinfos', TaskInfoviewsets)
 
 
 admin.site.site_header='Task Book'
 admin.site.index_title='TaskBook Administration'
 
+
 urlpatterns = [
+    path('', include(router.urls)),
+    path('taskapi/',TaskInfoList.as_view(),name='tasklist'),
     path('admin/', admin.site.urls),
-    path('',views.loginHandler, name='loginpage'),
+    path('login/',views.loginHandler, name='loginpage'),
     path('logout/',views.logoutHandler, name='logoutpage'),
     path('home/',views.home, name='homepage'),
     path('signup/',views.signupHandler, name='signuppage'),
