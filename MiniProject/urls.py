@@ -25,8 +25,8 @@ from rest_framework.routers import DefaultRouter
 from taskbook.views import *
 
 router = DefaultRouter()
-router.register(r'userinfos', UserInfoviewsets)
-# router.register(r'taskinfos', TaskInfoviewsets)
+router.register(r'userinfoapi', UserInfoviewsets)
+
 
 
 admin.site.site_header='Task Book'
