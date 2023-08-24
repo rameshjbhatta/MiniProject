@@ -34,12 +34,12 @@ admin.site.index_title='TaskBook Administration'
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('tasklist/',TaskInfoList.as_view(),name='tasklist'),
     path('taskcreate/',TaskInfoLC.as_view(),name='tasklistcreate'),
     path('taskupdate/<int:id>/',TaskInfoRUD.as_view(),name='taskRUD'),
     path('admin/', admin.site.urls),
-    path('login/',views.loginHandler, name='loginpage'),
+    path('',views.loginHandler, name='loginpage'),
     path('logout/',views.logoutHandler, name='logoutpage'),
     path('home/',views.home, name='homepage'),
     path('signup/',views.signupHandler, name='signuppage'),
