@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from taskbook.models import *
 from django.contrib.auth import logout
@@ -29,6 +30,11 @@ class TaskInfoRUD(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=TaskInfoSerializer
     lookup_field='id'
 
+def sessfun(request) :
+    num_visits = request.session.get('num_visits', 0) + 1
+    request.session['num_visits'] = num_visits 
+    resp = HttpResponse('view count='+str(num_visits))
+    return resp
 
 def loginHandler(request):
     if request.method=='POST':

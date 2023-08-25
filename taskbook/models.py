@@ -1,4 +1,5 @@
 from django.db import models
+from  django.contrib.auth.models import User
 
 # Create your models here.
 class UserInfo(models.Model):
@@ -15,6 +16,7 @@ class UserInfo(models.Model):
                 db_table = "userinfo"
 
 class TaskInfo(models.Model): 
+    
       usertask = models.CharField(blank=False,null=False,max_length=150)
       taskname=models.CharField(max_length=250)  
       location=models.CharField(max_length=250) 

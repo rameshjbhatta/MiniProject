@@ -32,14 +32,20 @@ router.register(r'userinfoapi', UserInfoviewsets)
 admin.site.site_header='Task Book'
 admin.site.index_title='TaskBook Administration'
 
+from django.views.generic import TemplateView
+
+
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='taskbook/main.html')),
+    path('sessfun', views.sessfun),
+
     path('api/', include(router.urls)),
     path('tasklist/',TaskInfoList.as_view(),name='tasklist'),
     path('taskcreate/',TaskInfoLC.as_view(),name='tasklistcreate'),
     path('taskupdate/<int:id>/',TaskInfoRUD.as_view(),name='taskRUD'),
     path('admin/', admin.site.urls),
-    path('',views.loginHandler, name='loginpage'),
+    path('login',views.loginHandler, name='loginpage'),
     path('logout/',views.logoutHandler, name='logoutpage'),
     path('home/',views.home, name='homepage'),
     path('signup/',views.signupHandler, name='signuppage'),
