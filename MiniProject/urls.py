@@ -23,34 +23,25 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from taskbook.views import *
+from django.views.generic import TemplateView
 
 router = DefaultRouter()
 router.register(r'userinfoapi', UserInfoviewsets)
 
-
-
 admin.site.site_header='Task Book'
 admin.site.index_title='TaskBook Administration'
 
-from django.views.generic import TemplateView
-
-
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='taskbook/main.html')),
-    path('sessfun', views.sessfun),
+    path('admin/', admin.site.urls),
+    path('',include('taskbook.urls')),
+    path('main/', TemplateView.as_view(template_name='taskbook/main.html')),
+    path('main/sessfun', views.sessfun),
 
     path('api/', include(router.urls)),
     path('tasklist/',TaskInfoList.as_view(),name='tasklist'),
     path('taskcreate/',TaskInfoLC.as_view(),name='tasklistcreate'),
     path('taskupdate/<int:id>/',TaskInfoRUD.as_view(),name='taskRUD'),
-    path('admin/', admin.site.urls),
-    path('login',views.loginHandler, name='loginpage'),
-    path('logout/',views.logoutHandler, name='logoutpage'),
-    path('home/',views.home, name='homepage'),
-    path('signup/',views.signupHandler, name='signuppage'),
-    path('create/',views.createTask, name='createpage'),
-    path('update/<int:id>',views.updateTask, name='updatepage'),
-    path('delete/<int:id>',views.deleteTask, name='deletepage'),
-    path('search/', views.searchTask,name="searchpage"),
+ 
+   
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
